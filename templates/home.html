@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -150,26 +150,30 @@
 
 <div class="container">
     <h1 class="title">Students List</h1>
+    <div>
+        {% block content%}
+        {% endblock %}
+    </div>
 
-    {% for i in form %}
-        <div class="card">
-            <h3>{{ i.name }}</h3>
-            <p><strong>Age:</strong> {{ i.age }}</p>
-            <p><strong>Email:</strong> {{ i.email }}</p>
-            <p><strong>Course:</strong> {{ i.course }}</p>
-            <p class="created">Created: {{ i.created_at|date:"d M Y, H:i" }}</p>
 
-            <div class="actions">
-                <a href="{% url 'update' i.pk %}" class="btn-update">✏️ Update</a>
-                <a href="{% url 'delete' i.pk %}" class="btn-delete">🗑️ Delete</a>
-            </div>
+    {% for i in students %}
+    <div class="card">
+        <h3>{{ i.name }}</h3>
+        <p><strong>Age:</strong> {{ i.age }}</p>
+        <p><strong>Email:</strong> {{ i.email }}</p>
+        <p><strong>Course:</strong> {{ i.course }}</p>
+        <p class="created">Created: {{ i.created_at }}</p>
+
+        <div class="actions">
+            <a href="{% url 'update' i.pk %}" class="btn-update">✏️ Update</a>
+            <a href="{% url 'delete' i.pk %}" class="btn-delete">🗑️ Delete</a>
         </div>
+    </div>
     {% endfor %}
 
     <div class="create-btn">
         <a href="{% url 'create' %}">+ Create Student</a>
     </div>
 </div>
-
 </body>
 </html>
