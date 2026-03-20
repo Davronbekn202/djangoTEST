@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 80px auto;
+        }
+
+        .card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        form p {
+            text-align: left;
+        }
+
+        button {
+            padding: 12px 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background: #c0392b;
+        }
+
+        .cancel {
+            display: inline-block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #555;
+        }
+
+        .cancel:hover {
+            color: #000;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">SUBMIT</button>
+        </form>
+
+        <a href="{% url 'home-page' %}" class="cancel">Cancel</a>
+    </div>
+</div>
+
+</body>
+</html>
