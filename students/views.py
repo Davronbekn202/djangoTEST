@@ -6,12 +6,23 @@ from .forms import BaseForm
 
 # Create your views here.
 
-
 def read(request):
-    info = StudentModel.objects.all()
-    info1 = StudentModel.objects.filter(age__gt=20, course='python', name__icontains='ali')
-    last_5_students = StudentModel.objects.order_by('-created_at')[:5]
-    return render(request, 'home.html', {'students': info})
+    query = request.GET.get('q', '')
+    if query:
+        students = StudentModel.objects.filter(
+            Q(name__icontains=query) | Q(course__icontains=query)
+        )
+    else:
+        students = StudentModel.objects.all()
+
+    return render(request, 'home.html', {'students': students, 'query': query})
+
+
+# def read(request):
+#     info = StudentModel.objects.all()
+#     info1 = StudentModel.objects.filter(age__gt=20, course='python', name__icontains='ali')
+#     last_5_students = StudentModel.objects.order_by('-created_at')[:5]
+#     return render(request, 'home.html', {'students': info})
 
 
 def create(request):
